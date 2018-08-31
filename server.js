@@ -19,10 +19,9 @@ app.options('*', cors());
 
 // routes(app);
 
-// const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-const startServer = (portObject) => {
-  const { port } = portObject;
+const startServer = () => {
   return app.listen(port, () => {
     console.log(`The app is listening on port ${port}`);
   });
