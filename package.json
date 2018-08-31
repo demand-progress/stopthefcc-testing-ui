@@ -1,0 +1,22 @@
+{
+  "name": "react_live_site_image_tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha test/ --timeout 5000"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pixelmatch": "^4.0.2",
+    "puppeteer": "^1.0.0"
+  }
+}
