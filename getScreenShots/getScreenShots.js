@@ -12,7 +12,9 @@ const options = {
 };
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
 
   // Start the browser, go to that page, and take a screenshot.
