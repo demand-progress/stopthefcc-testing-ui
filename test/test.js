@@ -1,10 +1,10 @@
 
 const { expect } = require('chai');
 const fs = require('fs');
-PNG = require('pngjs').PNG,
-pixelmatch = require('pixelmatch');
-puppeteer = require('puppeteer');
-startServer = require('../server.js');
+      PNG = require('pngjs').PNG,
+      pixelmatch = require('pixelmatch');
+      puppeteer = require('puppeteer');
+      startServer = require('../server.js');
 
 function compareScreenshots(fileName) {
   return new Promise((resolve, reject) => {
@@ -64,7 +64,7 @@ describe('👀 screenshots are correct', () => {
   before(async () => {
     // This is where you would substitute your python or Express server or whatever.
 
-    server = await startServer({ port: 4000 });
+    server = await startServer();
     // Create the test directory if needed. This and the goldenDir
     // variables are global somewhere.
     if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
