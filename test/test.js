@@ -1,10 +1,10 @@
 
 const { expect } = require('chai');
 const fs = require('fs');
-      PNG = require('pngjs').PNG,
-      pixelmatch = require('pixelmatch');
-      puppeteer = require('puppeteer');
-      startServer = require('../server.js');
+PNG = require('pngjs').PNG,
+pixelmatch = require('pixelmatch');
+puppeteer = require('puppeteer');
+// startServer = require('../server.js');
 
 function compareScreenshots(fileName) {
   return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ function compareScreenshots(fileName) {
 // - filePrefix is either "wide" or "narrow", since I'm automatically testing both.
 async function takeAndCompareScreenshot(page, route, filePrefix) {
   // If you didn't specify a file, use the name of the route.
-  const fileName = `${filePrefix }/${route || 'index'}`;
+  const fileName = `${filePrefix}/${route || 'index'}`;
 
   const options = {
     path: `testDir/${fileName}.png`,
@@ -57,53 +57,51 @@ async function takeAndCompareScreenshot(page, route, filePrefix) {
   return compareScreenshots(fileName);
 }
 
-describe('👀 screenshots are correct', () => {
-  let server; let browser; let
-    page;
-  // This is ran when the suite starts up.
-  before(async () => {
-    // This is where you would substitute your python or Express server or whatever.
+  describe('👀 screenshots are correct', () => {
+    let browser; let page;
+    // This is ran when the suite starts up.
+    before(async () => {
+      // This is where you would substitute your python or Express server or whatever.
 
-    server = await startServer();
-    // Create the test directory if needed. This and the goldenDir
-    // variables are global somewhere.
-    if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
+      // server = await startServer();
+      // Create the test directory if needed. This and the goldenDir
+      // variables are global somewhere.
+      if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
 
-    // And its wide screen/small screen subdirectories.
-    if (!fs.existsSync('testDir/wide')) fs.mkdirSync('testDir/wide');
-  });
+      // And its wide screen/small screen subdirectories.
+      if (!fs.existsSync('testDir/wide')) fs.mkdirSync('testDir/wide');
+    });
 
-  // This is ran when the suite is done. Stop your server here.
-  after(done => server.close(done));
+    // This is ran when the suite is done. Stop your server here.
+    // after(done => server.close(done));
 
-  // This is ran before every test. It's where you start a clean browser.
-  beforeEach(async () => {
-    browser = await puppeteer.launch({ headless: true });
-    page = await browser.newPage();
-  });
-
-  // This is ran after every test; clean up after your browser.
-  afterEach(() => browser.close());
-
-  // Wide screen tests!
-  describe('wide screen', () => {
+    // This is ran before every test. It's where you start a clean browser.
     beforeEach(async () => {
-      return page.setViewport({ width: 1280, height: 800 });
+      browser = await puppeteer.launch({ headless: true });
+      page = await browser.newPage();
     });
-    it('/view1', async () => {
-      return takeAndCompareScreenshot(page, 'view1', 'wide');
+
+    // This is ran after every test; clean up after your browser.
+    afterEach(() => browser.close());
+
+    // Wide screen tests!
+    describe('wide screen', () => {
+      beforeEach(async () => page.setViewport({ width: 1280, height: 800 }));
+      it('/view1', async () => takeAndCompareScreenshot(page, 'view1', 'wide'));
+      // And your other routes, 404, etc.
     });
-    // And your other routes, 404, etc.
+
+    // Narrow screen tests are the same, but with a different viewport.
+    // describe('narrow screen', function() {
+    //   beforeEach(async function() {
+    //     return page.setViewport({width: 375, height: 667});
+    //   });
+    //   it('/view1', async function() {
+    //     return takeAndCompareScreenshot(page, 'view1', 'narrow');
+    //   });
+    //   // And your other routes, 404, etc.
+    // });
   });
 
-  // Narrow screen tests are the same, but with a different viewport.
-  // describe('narrow screen', function() {
-  //   beforeEach(async function() {
-  //     return page.setViewport({width: 375, height: 667});
-  //   });
-  //   it('/view1', async function() {
-  //     return takeAndCompareScreenshot(page, 'view1', 'narrow');
-  //   });
-  //   // And your other routes, 404, etc.
-  // });
-});
+
+// module.exports = testing;
