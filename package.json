@@ -18,9 +18,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.4",
-    "cron": "^1.4.1",
     "express": "^4.16.3",
+    "node-cron": "^1.2.1",
     "pixelmatch": "^4.0.2",
     "puppeteer": "^1.0.0"
   }
