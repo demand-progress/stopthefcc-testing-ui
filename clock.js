@@ -2,7 +2,7 @@ let CronJob = require('cron').CronJob;
 let worker = require('./worker.js');
 
 let job = new CronJob({
-  cronTime: '15 10,11,16,20,22 * * *', // everyday, 9:13, 11:13, 4:13, 8:13,
+  cronTime: '0 */10 * * * *', // every 10 minutes,
   onTick: worker.start(),
   start: true,
   timeZone: 'America/Los_Angeles',
