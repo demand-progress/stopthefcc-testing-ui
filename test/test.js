@@ -50,7 +50,7 @@ async function takeAndCompareScreenshot(page, route, filePrefix) {
 }
 
 describe('👀 screenshots are correct', () => {
-  const browser; const page;
+  let browser; let page;
 
   before(async () => {
 
