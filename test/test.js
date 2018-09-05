@@ -28,7 +28,7 @@ function compareScreenshots(fileName) {
       );
       // The files should look the same.
       expect(numDiffPixels, 'number of different pixels').equal(0);
-      resolve();
+      resolve(numDiffPixels);
     }
   });
 }
@@ -57,51 +57,59 @@ async function takeAndCompareScreenshot(page, route, filePrefix) {
   return compareScreenshots(fileName);
 }
 
-  describe('👀 screenshots are correct', () => {
-    let browser; let page;
-    // This is ran when the suite starts up.
-    before(async () => {
-      // This is where you would substitute your python or Express server or whatever.
+describe('👀 screenshots are correct', () => {
+  let browser; let page;
+  // This is ran when the suite starts up.
+  before(async () => {
+    // This is where you would substitute your python or Express server or whatever.
 
-      // server = await startServer();
-      // Create the test directory if needed. This and the goldenDir
-      // variables are global somewhere.
-      if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
+    // server = await startServer();
+    // Create the test directory if needed. This and the goldenDir
+    // variables are global somewhere.
+    if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
 
-      // And its wide screen/small screen subdirectories.
-      if (!fs.existsSync('testDir/wide')) fs.mkdirSync('testDir/wide');
-    });
-
-    // This is ran when the suite is done. Stop your server here.
-    // after(done => server.close(done));
-
-    // This is ran before every test. It's where you start a clean browser.
-    beforeEach(async () => {
-      browser = await puppeteer.launch({ headless: true });
-      page = await browser.newPage();
-    });
-
-    // This is ran after every test; clean up after your browser.
-    afterEach(() => browser.close());
-
-    // Wide screen tests!
-    describe('wide screen', () => {
-      beforeEach(async () => page.setViewport({ width: 1280, height: 800 }));
-      it('/view1', async () => takeAndCompareScreenshot(page, 'view1', 'wide'));
-      // And your other routes, 404, etc.
-    });
-
-    // Narrow screen tests are the same, but with a different viewport.
-    // describe('narrow screen', function() {
-    //   beforeEach(async function() {
-    //     return page.setViewport({width: 375, height: 667});
-    //   });
-    //   it('/view1', async function() {
-    //     return takeAndCompareScreenshot(page, 'view1', 'narrow');
-    //   });
-    //   // And your other routes, 404, etc.
-    // });
+    // And its wide screen/small screen subdirectories.
+    if (!fs.existsSync('testDir/wide')) fs.mkdirSync('testDir/wide');
   });
+
+  // This is ran when the suite is done. Stop your server here.
+  // after(done => server.close(done));
+
+  // This is ran before every test. It's where you start a clean browser.
+  beforeEach(async () => {
+    browser = await puppeteer.launch({ headless: true });
+    page = await browser.newPage();
+  });
+
+  // This is ran after every test; clean up after your browser.
+  afterEach(() => browser.close());
+
+  // Wide screen tests!
+  describe('wide screen', () => {
+    beforeEach(async () => page.setViewport({ width: 1280, height: 800 }));
+    it('/view1', async () => {
+      const comparedValue = await takeAndCompareScreenshot(page, 'view1', 'wide');
+      console.log('compared value ', comparedValue);
+      if (comparedValue > 0 || comparedValue < 0) {
+        // sent email to notify of error
+        console.log('if statement ', comparedValue);
+      }
+      return comparedValue;
+    });
+    // And your other routes, 404, etc.
+  });
+
+  // Narrow screen tests are the same, but with a different viewport.
+  // describe('narrow screen', function() {
+  //   beforeEach(async function() {
+  //     return page.setViewport({width: 375, height: 667});
+  //   });
+  //   it('/view1', async function() {
+  //     return takeAndCompareScreenshot(page, 'view1', 'narrow');
+  //   });
+  //   // And your other routes, 404, etc.
+  // });
+});
 
 
 // module.exports = testing;
