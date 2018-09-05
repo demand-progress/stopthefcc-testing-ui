@@ -21,8 +21,6 @@ app.options('*', cors());
 
 // routes(app);
 
-const port = process.env.PORT || 3000;
-
 cron.schedule('*/20 * * * * *', () => {
   console.log('running a task every minute');
   let commandList = [
@@ -38,7 +36,7 @@ cron.schedule('*/20 * * * * *', () => {
   });
 });
 
-
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`The app is listening on port ${port}`);
 });
