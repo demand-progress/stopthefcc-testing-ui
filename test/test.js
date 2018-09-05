@@ -1,9 +1,9 @@
 
 const { expect } = require('chai');
 const fs = require('fs');
-PNG = require('pngjs').PNG,
-pixelmatch = require('pixelmatch');
-puppeteer = require('puppeteer');
+  PNG = require('pngjs').PNG,
+  pixelmatch = require('pixelmatch');
+  puppeteer = require('puppeteer');
 // startServer = require('../server.js');
 
 function compareScreenshots(fileName) {
@@ -95,7 +95,7 @@ describe('👀 screenshots are correct', () => {
         console.log('if statement ', comparedValue);
       }
       return comparedValue;
-    });
+    }).timeout(6000);
     // And your other routes, 404, etc.
   });
 
