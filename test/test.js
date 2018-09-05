@@ -74,7 +74,10 @@ describe('👀 screenshots are correct', () => {
       console.log('compared value ', comparedValue);
       if (comparedValue > 0 || comparedValue < 0 ) {
         // sent email to notify of error
-        const mailgun = new Mailgun({ apiKey: apiKey, domain: domain });
+        let apiKeyz = process.env.MAILGUN_API_KEY || apiKey;
+        let domainz = process.env.MAILGUN_DOMAIN || domain;
+
+        const mailgun = new Mailgun({ apiKey: apiKeyz, domain: domainz });
 
         const data = {
           from: 'mateo.balcorta@gmail.com',
