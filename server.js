@@ -21,20 +21,20 @@ app.options('*', cors());
 
 // routes(app);
 
-cron.schedule('*/20 * * * * *', () => {
-  console.log('running a task every minute');
-  let commandList = [
-    'npm run test',
-  ];
+// cron.schedule('*/20 * * * * *', () => {
+//   console.log('running a task every minute');
+//   let commandList = [
+//     'npm run test',
+//   ];
 
-  shell.series(commandList, (err) => {
-    if(err) {
-      console.log('Error: ', err);
-    } else {
-      console.log('Site is working as expected');
-    }
-  });
-});
+//   shell.series(commandList, (err) => {
+//     if(err) {
+//       console.log('Error: ', err);
+//     } else {
+//       console.log('Site is working as expected');
+//     }
+//   });
+// });
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
