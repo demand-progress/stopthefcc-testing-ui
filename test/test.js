@@ -77,7 +77,7 @@ describe('👀 screenshots are correct', () => {
 
   // This is ran before every test. It's where you start a clean browser.
   beforeEach(async () => {
-    browser = await puppeteer.launch({ headless: true });
+    browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     page = await browser.newPage();
   });
 
