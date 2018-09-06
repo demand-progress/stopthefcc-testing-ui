@@ -1,6 +1,6 @@
 
 const { expect } = require('chai');
-const { domain, apiKey } = require('../config.js');
+// const { domain, apiKey } = require('../config.js');
 const fs = require('fs');
   PNG = require('pngjs').PNG,
   pixelmatch = require('pixelmatch');
