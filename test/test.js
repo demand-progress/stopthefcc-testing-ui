@@ -1,17 +1,26 @@
 
 const { expect } = require('chai');
-// const { domain, apiKey } = require('../config.js');
 const fs = require('fs');
   PNG = require('pngjs').PNG,
   pixelmatch = require('pixelmatch');
   puppeteer = require('puppeteer');
   Mailgun = require('mailgun-js');
- 
+
+let mailGunDomainKey;
+let mailgunApiKey;
+
+if (!process.env.MAILGUN_API_KEY) {
+  const {domain, apiKey } = require('../config.js');
+  mailGunDomainKey = domain;
+  mailgunApiKey = apiKey;
+}
+
 function compareScreenshots(fileName) {
-  return new Promise((resolve, reject) => {
+
+  return new Promise((resolve) => {
     const img1 = fs.createReadStream(`./testDir/${fileName}.png`).pipe(new PNG()).on('parsed', doneReading);
     const img2 = fs.createReadStream('./getScreenShots/correctPage.png').pipe(new PNG()).on('parsed', doneReading);
-
+  
     let filesRead = 0;
     function doneReading() {
       if (++filesRead < 2) return;
@@ -43,9 +52,10 @@ async function takeAndCompareScreenshot(page, route, filePrefix) {
       height: 2100,
     },
   };
-
+ 
   await page.goto('https://stopthefcc.net/', { waitUntil: 'networkidle2' });
   await page.screenshot(options);
+
   return compareScreenshots(fileName);
 }
 
@@ -53,7 +63,6 @@ describe('👀 screenshots are correct', () => {
   let browser; let page;
 
   before(async () => {
-
     if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
 
     if (!fs.existsSync('testDir/wide')) fs.mkdirSync('testDir/wide');
@@ -71,27 +80,26 @@ describe('👀 screenshots are correct', () => {
     beforeEach(async () => page.setViewport({ width: 1280, height: 800 }));
     it('both should be the same image', async () => {
       const comparedValue = await takeAndCompareScreenshot(page, 'view1', 'wide');
-      console.log('compared value ', comparedValue);
-      if (comparedValue > 0 || comparedValue < 0 ) {
+      if (comparedValue > 0 || comparedValue < 0) {
         // sent email to notify of error
-        let apiKeyz = process.env.MAILGUN_API_KEY || apiKey;
-        let domainz = process.env.MAILGUN_DOMAIN || domain;
-
+        const apiKeyz = process.env.MAILGUN_API_KEY || mailgunApiKey;
+        const domainz = process.env.MAILGUN_DOMAIN || mailGunDomainKey;
         const mailgun = new Mailgun({ apiKey: apiKeyz, domain: domainz });
-
+        const filepath = path.join(__dirname, '../testDir/wide/view1.png');
         const data = {
           from: 'mateo.balcorta@gmail.com',
           to: 'mateo.balcorta@gmail.com',
           subject: 'Stopthefcc.org site has an error',
-          text: 'A fake invoice should be attached, it is just an empty text file after all'
+          text: 'Review site for issues',
+          attachment: filepath,
         };
-      
+
         // Sending the email
-        mailgun.messages().send(data, (error) => {
+        mailgun.messages().send(data, (error, body) => {
           if (error) {
             console.log('we have an error: ', error);
           } else {
-            console.log('email on its way');
+            console.log('email on its way', body);
           }
         });
       }
