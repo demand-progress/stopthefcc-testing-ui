@@ -25,6 +25,7 @@ describe('👀 screenshots are correct', () => {
   describe('When comparing live site screen shot to original screen shot', () => {
     beforeEach(async () => page.setViewport({ width: 1280, height: 800 }));
     it('stopthefcc live site logos should be the same', async () => {
+      const fileName = 'stopthefcc'; 
       const options = {
         path: 'test/liveSiteImages/stopthefcc.png',
         fullPage: false,
@@ -35,13 +36,14 @@ describe('👀 screenshots are correct', () => {
           height: 2100,
         },
       };
-      const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', 'stopthefcc', options);
+      const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', fileName, options);
       if (comparedValue > 0 || comparedValue < 0) {
-        sendEmail('mateo@demandprogress.org');
+        sendEmail('mateo@demandprogress.org', fileName);
       }
       return comparedValue;
     }).timeout(6000);
     it('nomobilemegamerger live site logos should be the same', async () => {
+      const fileName = 'nomobilemegamerger';
       const options = {
         path: 'test/liveSiteImages/nomobilemegamerger.png',
         fullPage: false,
@@ -52,9 +54,9 @@ describe('👀 screenshots are correct', () => {
           height: 200,
         },
       };
-      const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', 'nomobilemegamerger', options);
+      const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
       if (comparedValue > 0 || comparedValue < 0) {
-        sendEmail('mateo@demandprogress.org');
+        sendEmail('mateo@demandprogress.org', fileName);
       }
       return comparedValue;
     }).timeout(9000);
