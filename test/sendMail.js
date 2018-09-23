@@ -3,7 +3,7 @@ let mailGunDomainKey;
 let mailgunApiKey;
 
 if (!process.env.MAILGUN_API_KEY) {
-  const {domain, apiKey } = require('../config.js');
+  const { domain, apiKey } = require('../config.js');
   mailGunDomainKey = domain;
   mailgunApiKey = apiKey;
 }
