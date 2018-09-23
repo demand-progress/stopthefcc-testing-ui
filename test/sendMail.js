@@ -1,4 +1,6 @@
 const Mailgun = require('mailgun-js');
+const path = require('path');
+
 let mailGunDomainKey;
 let mailgunApiKey;
 
@@ -8,16 +10,17 @@ if (!process.env.MAILGUN_API_KEY) {
   mailgunApiKey = apiKey;
 }
 
-const sendEmail = (toFromEmail) => {
+const sendEmail = (toFromEmail, fileName) => {
   // sent email to notify of error
   const apiKeyz = process.env.MAILGUN_API_KEY || mailgunApiKey;
   const domainz = process.env.MAILGUN_DOMAIN || mailGunDomainKey;
   const mailgun = new Mailgun({ apiKey: apiKeyz, domain: domainz });
-  const filepath = path.join(__dirname, '../testDir/wide/view1.png');
+  const filePathName =  `./liveSiteImages/${fileName}.png`;
+  const filepath = path.join(__dirname, filePathName);
   const data = {
     from: toFromEmail,
     to: toFromEmail,
-    subject: 'Stopthefcc.org site has an error',
+    subject: `${fileName} site has an error`,
     text: 'Review site for issues',
     attachment: filepath,
   };
