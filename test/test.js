@@ -15,10 +15,10 @@ describe('👀 screenshots are correct', () => {
   after(async () => {
     const removeImages = image => new Promise((resolve) => {
       fs.unlink(path.join(__dirname, `./livesiteimages/${image}`), () => {
-        resolve('done');
+        resolve(image);
       });
     });
-    Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png')]).then((values) => {
+    Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png')]).then((image) => {
       console.log(`${image} has been removed`);
     });
   });
