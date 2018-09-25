@@ -23,7 +23,9 @@ describe('👀 screenshots are correct', () => {
   afterEach(() => browser.close());
 
   describe('When comparing live site screen shot to original screen shot', () => {
-    beforeEach(async () => page.setViewport({ width: 1280, height: 800 }));
+    beforeEach(async () => {
+      page.setViewport({ width: 1280, height: 800 });
+    });
     it('stopthefcc live site logos should be the same', async () => {
       const fileName = 'stopthefcc'; 
       const options = {
@@ -41,7 +43,7 @@ describe('👀 screenshots are correct', () => {
         sendEmail('mateo@demandprogress.org', fileName);
       }
       return comparedValue;
-    }).timeout(6000);
+    }).timeout(15000);
     it('nomobilemegamerger live site logos should be the same', async () => {
       const fileName = 'nomobilemegamerger';
       const options = {
@@ -59,6 +61,6 @@ describe('👀 screenshots are correct', () => {
         sendEmail('mateo@demandprogress.org', fileName);
       }
       return comparedValue;
-    }).timeout(9000);
+    }).timeout(15000);
   });
 });
