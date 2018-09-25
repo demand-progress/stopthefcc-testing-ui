@@ -1,7 +1,6 @@
 
 const { expect } = require('chai');
 const { takeAndCompareScreenshot } = require('./compareScreenShots.js');
-const { sendEmail } = require('./sendMail.js');
 const fs = require('fs');
 puppeteer = require('puppeteer');
 
@@ -39,9 +38,6 @@ describe('👀 screenshots are correct', () => {
         },
       };
       const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', fileName, options);
-      if (comparedValue > 0 || comparedValue < 0) {
-        sendEmail('mateo@demandprogress.org', fileName);
-      }
       return comparedValue;
     }).timeout(15000);
     it('nomobilemegamerger live site logos should be the same', async () => {
@@ -57,9 +53,6 @@ describe('👀 screenshots are correct', () => {
         },
       };
       const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
-      if (comparedValue > 0 || comparedValue < 0) {
-        sendEmail('mateo@demandprogress.org', fileName);
-      }
       return comparedValue;
     }).timeout(15000);
   });
