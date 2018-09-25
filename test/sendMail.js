@@ -10,17 +10,17 @@ if (!process.env.MAILGUN_API_KEY) {
   mailgunApiKey = apiKey;
 }
 
-const sendEmail = (toFromEmail, fileName) => {
+const sendEmail = (toFromEmail, filePath) => {
   // sent email to notify of error
   const apiKeyz = process.env.MAILGUN_API_KEY || mailgunApiKey;
   const domainz = process.env.MAILGUN_DOMAIN || mailGunDomainKey;
   const mailgun = new Mailgun({ apiKey: apiKeyz, domain: domainz });
-  const filePathName =  `./liveSiteImages/${fileName}.png`;
+  const filePathName = `./${filePath}.png`;
   const filepath = path.join(__dirname, filePathName);
   const data = {
     from: toFromEmail,
     to: toFromEmail,
-    subject: `${fileName} site has an error`,
+    subject: `${filePath} site has an error`,
     text: 'Review site for issues',
     attachment: filepath,
   };
