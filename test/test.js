@@ -3,14 +3,24 @@ const { expect } = require('chai');
 const { takeAndCompareScreenshot } = require('./compareScreenShots.js');
 const fs = require('fs');
 puppeteer = require('puppeteer');
+path = require('path');
 
 describe('👀 screenshots are correct', () => {
   let browser; let page;
 
   before(async () => {
-    // if (!fs.existsSync('testDir')) fs.mkdirSync('testDir');
-
     if (!fs.existsSync('test/liveSiteImages')) fs.mkdirSync('test/liveSiteImages');
+  });
+
+  after(async () => {
+    const removeImages = image => new Promise((resolve) => {
+      fs.unlink(path.join(__dirname, `./livesiteimages/${image}`), () => {
+        resolve('done');
+      });
+    });
+    Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png')]).then((values) => {
+      console.log(`${image} has been removed`);
+    });
   });
 
   beforeEach(async () => {
@@ -19,14 +29,16 @@ describe('👀 screenshots are correct', () => {
   });
 
   // This is ran after every test; clean up after your browser.
-  afterEach(() => browser.close());
+  afterEach(() => {
+    browser.close();
+  });
 
   describe('When comparing live site screen shot to original screen shot', () => {
     beforeEach(async () => {
       page.setViewport({ width: 1280, height: 800 });
     });
     it('stopthefcc live site logos should be the same', async () => {
-      const fileName = 'stopthefcc'; 
+      const fileName = 'stopthefcc';
       const options = {
         path: 'test/liveSiteImages/stopthefcc.png',
         fullPage: false,
