@@ -25,6 +25,7 @@ const compareScreenshots = (fileName, path) => {
 const takeAndCompareScreenshot = async (page, url, dir, path, options) => {
   const fileName = `${dir}/${path}`;
   await page.goto(url, { waitUntil: 'networkidle2' });
+  await page.waitFor(5000);
   await page.screenshot(options);
   return compareScreenshots(fileName, path);
 }
