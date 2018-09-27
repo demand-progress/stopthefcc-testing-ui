@@ -18,7 +18,7 @@ describe('👀 screenshots are correct', () => {
         resolve(image);
       });
     });
-    Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png')]).then((image) => {
+    Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png'), removeImages('stopthewar.png')]).then((image) => {
       console.log(`${image} has been removed`);
     });
   });
@@ -52,20 +52,35 @@ describe('👀 screenshots are correct', () => {
       const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', fileName, options);
       return comparedValue;
     }).timeout(15000);
-    it('nomobilemegamerger live site logos should be the same', async () => {
-      const fileName = 'nomobilemegamerger';
+    it('stopthewar live site logos should be the same', async () => {
+      const fileName = 'stopthewar';
       const options = {
-        path: 'test/liveSiteImages/nomobilemegamerger.png',
+        path: 'test/liveSiteImages/stopthewar.png',
         fullPage: false,
         clip: {
-          x: 0,
-          y: 2320,
+          x: 200,
+          y: 3330,
           width: 1280,
-          height: 200,
+          height: 820,
         },
       };
-      const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
+      const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthewar.us/', 'liveSiteImages', fileName, options);
       return comparedValue;
     }).timeout(15000);
+    // it('nomobilemegamerger live site logos should be the same', async () => {
+    //   const fileName = 'nomobilemegamerger';
+    //   const options = {
+    //     path: 'test/liveSiteImages/nomobilemegamerger.png',
+    //     fullPage: false,
+    //     clip: {
+    //       x: 0,
+    //       y: 2320,
+    //       width: 1280,
+    //       height: 200,
+    //     },
+    //   };
+    //   const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
+    //   return comparedValue;
+    // }).timeout(15000);
   });
 });
