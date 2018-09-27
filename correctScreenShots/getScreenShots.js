@@ -19,6 +19,7 @@ const correctSiteImages = (url, fileName, clip) => new Promise((resolve, reject)
     // Start the browser, go to that page, and take a screenshot.
     await page.goto(url, { waitUntil: 'networkidle2' });
     await page.setViewport({ width: 1280, height: 800 });
+    await page.waitFor(5000);
     await page.screenshot(options);
     browser.close();
     if (fs.existsSync(`./correctScreenShots/${fileName}`)) {
@@ -33,11 +34,11 @@ const correctSiteImages = (url, fileName, clip) => new Promise((resolve, reject)
 Promise.all([
   correctSiteImages('https://stopthefcc.net/', 'stopthefcc.png', {
     x: 0,
-    y: 2250,
+    y: 2300,
     width: 1280,
-    height: 2100,
+    height: 2000,
   }),
-  correctSiteImages('https://stopthewar.us', 'stopthewar.png', {
+  correctSiteImages('https://stopthewar.us/', 'stopthewar.png', {
     x: 200,
     y: 3330,
     width: 1280,

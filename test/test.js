@@ -49,9 +49,9 @@ describe('👀 screenshots are correct', () => {
         fullPage: false,
         clip: {
           x: 0,
-          y: 2250,
+          y: 2300,
           width: 1280,
-          height: 2100,
+          height: 2000,
         },
       };
       const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', fileName, options);
@@ -64,7 +64,7 @@ describe('👀 screenshots are correct', () => {
         fullPage: false,
         clip: {
           x: 200,
-          y: 2000,
+          y: 3330,
           width: 1280,
           height: 820,
         },
