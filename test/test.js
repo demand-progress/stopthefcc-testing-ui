@@ -64,7 +64,7 @@ describe('👀 screenshots are correct', () => {
         fullPage: false,
         clip: {
           x: 200,
-          y: 3330,
+          y: 3306,
           width: 1280,
           height: 820,
         },
