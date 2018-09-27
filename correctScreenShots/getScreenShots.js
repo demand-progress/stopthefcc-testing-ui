@@ -37,12 +37,19 @@ Promise.all([
     width: 1280,
     height: 2100,
   }),
+  correctSiteImages('https://stopthewar.us', 'stopthewar.png', {
+    x: 200,
+    y: 3330,
+    width: 1280,
+    height: 820,
+  }),
   correctSiteImages('https://nomobilemegamerger.com/demo', 'nomobilemegamerger.png', {
     x: 0,
     y: 2320,
     width: 1280,
     height: 200,
-  })]).then((response) => {
+  })
+]).then((response) => {
   console.log(response);
 }).catch((error) => {
   console.log(error);
