@@ -51,7 +51,7 @@ describe('👀 screenshots are correct', () => {
       };
       const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', fileName, options);
       return comparedValue;
-    }).timeout(15000);
+    }).timeout(25000);
     it('stopthewar live site logos should be the same', async () => {
       const fileName = 'stopthewar';
       const options = {
@@ -66,7 +66,7 @@ describe('👀 screenshots are correct', () => {
       };
       const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthewar.us/', 'liveSiteImages', fileName, options);
       return comparedValue;
-    }).timeout(15000);
+    }).timeout(25000);
     // it('nomobilemegamerger live site logos should be the same', async () => {
     //   const fileName = 'nomobilemegamerger';
     //   const options = {
