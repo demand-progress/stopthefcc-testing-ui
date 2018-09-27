@@ -42,25 +42,29 @@ describe('👀 screenshots are correct', () => {
     afterEach(() => {
       browser.close();
     });
-    it('stopthefcc live site logos should be the same', async () => {
-      const fileName = 'stopthefcc';
-      const options = {
-        path: 'test/liveSiteImages/stopthefcc.png',
-        fullPage: false,
-        clip: {
-          x: 0,
-          y: 2300,
-          width: 1280,
-          height: 2000,
-        },
-      };
-      const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthefcc.net/', 'liveSiteImages', fileName, options);
-      return comparedValue;
-    }).timeout(25000);
+    // it('stopthefcc live site logos should be the same', async () => {
+    //   const fileName = 'stopthefcc';
+    //   const dir = 'liveSiteImages';
+    //   const url = 'https://stopthefcc.net/';
+    //   const options = {
+    //     path: `test/${dir}/${fileName}.png`,
+    //     fullPage: false,
+    //     clip: {
+    //       x: 0,
+    //       y: 2300,
+    //       width: 1280,
+    //       height: 2000,
+    //     },
+    //   };
+    //   const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
+    //   return comparedValue;
+    // }).timeout(25000);
     it('stopthewar live site logos should be the same', async () => {
       const fileName = 'stopthewar';
+      const dir = 'liveSiteImages';
+      const url = 'https://stopthewar.us/';
       const options = {
-        path: 'test/liveSiteImages/stopthewar.png',
+        path: `test/${dir}/${fileName}.png`,
         fullPage: false,
         clip: {
           x: 200,
@@ -69,7 +73,7 @@ describe('👀 screenshots are correct', () => {
           height: 820,
         },
       };
-      const comparedValue = await takeAndCompareScreenshot(page, 'https://stopthewar.us/', 'liveSiteImages', fileName, options);
+      const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
       return comparedValue;
     }).timeout(25000);
     // it('nomobilemegamerger live site logos should be the same', async () => {
