@@ -18,7 +18,7 @@ const correctSiteImages = (url, fileName, clip) => new Promise((resolve, reject)
 
     // Start the browser, go to that page, and take a screenshot.
     await page.goto(url, { waitUntil: 'networkidle2' });
-    await page.setViewport({ width: 1280, height: 800 });
+    await page.setViewport({ width: 1280, height: 820 });
     await page.waitFor(5000);
     await page.screenshot(options);
     browser.close();
