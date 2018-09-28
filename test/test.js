@@ -90,6 +90,6 @@ describe('👀 screenshots are correct', () => {
       };
       const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
       return comparedValue;
-    }).timeout(15000);
+    }).timeout(25000);
   });
 });
