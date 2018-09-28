@@ -76,20 +76,20 @@ describe('👀 screenshots are correct', () => {
       const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
       return comparedValue;
     }).timeout(25000);
-    // it('nomobilemegamerger live site logos should be the same', async () => {
-    //   const fileName = 'nomobilemegamerger';
-    //   const options = {
-    //     path: 'test/liveSiteImages/nomobilemegamerger.png',
-    //     fullPage: false,
-    //     clip: {
-    //       x: 0,
-    //       y: 2320,
-    //       width: 1280,
-    //       height: 200,
-    //     },
-    //   };
-    //   const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
-    //   return comparedValue;
-    // }).timeout(15000);
+    it('nomobilemegamerger live site logos should be the same', async () => {
+      const fileName = 'nomobilemegamerger';
+      const options = {
+        path: 'test/liveSiteImages/nomobilemegamerger.png',
+        fullPage: false,
+        clip: {
+          x: 0,
+          y: 2350,
+          width: 1280,
+          height: 400,
+        },
+      };
+      const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
+      return comparedValue;
+    }).timeout(15000);
   });
 });
