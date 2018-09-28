@@ -46,9 +46,9 @@ Promise.all([
   }),
   correctSiteImages('https://nomobilemegamerger.com/demo', 'nomobilemegamerger.png', {
     x: 0,
-    y: 2320,
+    y: 2350,
     width: 1280,
-    height: 200,
+    height: 400,
   })
 ]).then((response) => {
   console.log(response);
