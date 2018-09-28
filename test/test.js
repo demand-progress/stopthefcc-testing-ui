@@ -39,26 +39,26 @@ describe('👀 screenshots are correct', () => {
       page = await browser.newPage();
       page.setViewport({ width: 1280, height: 820 });
     });
-    afterEach(() => {
-      browser.close();
+    afterEach(async () => {
+      await browser.close();
     });
-    // it('stopthefcc live site logos should be the same', async () => {
-    //   const fileName = 'stopthefcc';
-    //   const dir = 'liveSiteImages';
-    //   const url = 'https://stopthefcc.net/';
-    //   const options = {
-    //     path: `test/${dir}/${fileName}.png`,
-    //     fullPage: false,
-    //     clip: {
-    //       x: 0,
-    //       y: 2300,
-    //       width: 1280,
-    //       height: 2000,
-    //     },
-    //   };
-    //   const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
-    //   return comparedValue;
-    // }).timeout(25000);
+    it('stopthefcc live site logos should be the same', async () => {
+      const fileName = 'stopthefcc';
+      const dir = 'liveSiteImages';
+      const url = 'https://stopthefcc.net/';
+      const options = {
+        path: `test/${dir}/${fileName}.png`,
+        fullPage: false,
+        clip: {
+          x: 0,
+          y: 2300,
+          width: 1280,
+          height: 2000,
+        },
+      };
+      const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
+      return comparedValue;
+    }).timeout(25000);
     it('stopthewar live site logos should be the same', async () => {
       const fileName = 'stopthewar';
       const dir = 'liveSiteImages';
