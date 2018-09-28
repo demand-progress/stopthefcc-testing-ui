@@ -67,10 +67,10 @@ describe('👀 screenshots are correct', () => {
         path: `test/${dir}/${fileName}.png`,
         fullPage: false,
         clip: {
-          x: 200,
-          y: 3330,
+          x: 0,
+          y: 3100,
           width: 1280,
-          height: 820,
+          height: 1150,
         },
       };
       const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
