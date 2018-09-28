@@ -39,10 +39,10 @@ Promise.all([
     height: 2000,
   }),
   correctSiteImages('https://stopthewar.us/', 'stopthewar.png', {
-    x: 200,
-    y: 3330,
+    x: 0,
+    y: 3100,
     width: 1280,
-    height: 820,
+    height: 1150,
   }),
   correctSiteImages('https://nomobilemegamerger.com/demo', 'nomobilemegamerger.png', {
     x: 0,
