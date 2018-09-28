@@ -17,6 +17,7 @@ const sendEmail = (toFromEmail, filePath) => {
   const mailgun = new Mailgun({ apiKey: apiKeyz, domain: domainz });
   const filePathName = `./${filePath}.png`;
   const filepath = path.join(__dirname, filePathName);
+  console.log('image file path sent to email ', filePath)
   const data = {
     from: toFromEmail,
     to: toFromEmail,
