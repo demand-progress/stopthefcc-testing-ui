@@ -44,11 +44,11 @@ Promise.all([
     width: 1280,
     height: 1150,
   }),
-  correctSiteImages('https://nomobilemegamerger.com/demo', 'nomobilemegamerger.png', {
+  correctSiteImages('https://nomobilemegamerger.com/', 'nomobilemegamerger.png', {
     x: 0,
     y: 2350,
     width: 1280,
-    height: 400,
+    height: 600,
   })
 ]).then((response) => {
   console.log(response);
