@@ -78,6 +78,8 @@ describe('👀 screenshots are correct', () => {
     }).timeout(25000);
     it('nomobilemegamerger live site logos should be the same', async () => {
       const fileName = 'nomobilemegamerger';
+      const dir = 'liveSiteImages';
+      const url = 'https://nomobilemegamerger.com/';
       const options = {
         path: 'test/liveSiteImages/nomobilemegamerger.png',
         fullPage: false,
@@ -85,10 +87,10 @@ describe('👀 screenshots are correct', () => {
           x: 0,
           y: 2350,
           width: 1280,
-          height: 400,
+          height: 600,
         },
       };
-      const comparedValue = await takeAndCompareScreenshot(page, 'https://nomobilemegamerger.com/demo', 'liveSiteImages', fileName, options);
+      const comparedValue = await takeAndCompareScreenshot(page, url, dir, fileName, options);
       return comparedValue;
     }).timeout(25000);
   });
