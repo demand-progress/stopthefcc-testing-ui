@@ -37,7 +37,7 @@ describe('👀 screenshots are correct', () => {
     beforeEach(async () => {
       browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
       page = await browser.newPage();
-      page.setViewport({ width: 1280, height: 820 });
+      page.setViewport({ width: 1280, height: 600 });
     });
     afterEach(async () => {
       await browser.close();
