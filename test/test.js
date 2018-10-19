@@ -13,14 +13,14 @@ describe('👀 screenshots are correct', () => {
   });
 
   after(async () => {
-    const removeImages = image => new Promise((resolve) => {
-      fs.unlink(path.join(__dirname, `./livesiteimages/${image}`), () => {
-        resolve(image);
-      });
-    });
-    Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png'), removeImages('stopthewar.png')]).then((image) => {
-      console.log(`${image} has been removed`);
-    });
+    // const removeImages = image => new Promise((resolve) => {
+    //   fs.unlink(path.join(__dirname, `./livesiteimages/${image}`), () => {
+    //     resolve(image);
+    //   });
+    // });
+    // Promise.all([removeImages('nomobilemegamerger.png'), removeImages('stopthefcc.png'), removeImages('stopthewar.png')]).then((image) => {
+    //   console.log(`${image} has been removed`);
+    // });
   });
 
   // beforeEach(async () => {
