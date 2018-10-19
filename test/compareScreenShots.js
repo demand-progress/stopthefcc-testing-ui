@@ -16,16 +16,10 @@ const compareScreenshots = (filePath, fileName) => {
       expect(img1.width, 'image widths are the same').equal(img2.width);
       expect(img1.height, 'image heights are the same').equal(img2.height);
       const diff = new PNG({ width: img1.width, height: img2.height });
-<<<<<<< HEAD
-      const numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, img1.width, img1.height, { threshold: 0.1 });
-      if (numDiffPixels > 0 || numDiffPixels < 0) {
-        sendEmail('mateo@demandprogress.org', filePath);
-=======
       const numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, img1.width, img1.height, { threshold: 0.1});
       if (numDiffPixels > 0 || numDiffPixels < 0) {
         console.log('num of pixels off ', numDiffPixels)
         // sendEmail('mateo@demandprogress.org', filePath);
->>>>>>> Update file name of screenshots.
       }
       expect(numDiffPixels, 'number of different pixels').equal(0);
       resolve(numDiffPixels);
