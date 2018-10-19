@@ -3,33 +3,30 @@ const fs = require('fs');
 
 // make function that will create screen shots of several sites
 
-const correctSiteImages = (url, fileName, clip) => new Promise((resolve, reject) => {
+const correctSiteImages = (url, fileName, clip) => new Promise((resolve, reject) => (async () => {
   const options = {
-    path: `./correctScreenShots/${fileName}`,
+    path: `./screenShots/${fileName}`,
     fullPage: false,
     clip,
   };
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+  const page = await browser.newPage();
 
-  (async () => {
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-    const page = await browser.newPage();
-
-    // Start the browser, go to that page, and take a screenshot.
-    await page.goto(url, { waitUntil: 'networkidle2' });
-    await page.setViewport({ width: 1280, height: 820 });
-    await page.waitFor(5000);
-    await page.screenshot(options);
-    browser.close();
-    if (fs.existsSync(`./correctScreenShots/${fileName}`)) {
-      resolve(`Screen shot complete for ${url}`);
-    } else {
-      const error = new Error(`Screen shot was not taken for ${url}`);
-      reject(error);
-    }
-  })();
-});
+  // Start the browser, go to that page, and take a screenshot.
+  await page.goto(url, { waitUntil: 'networkidle2' });
+  await page.setViewport({ width: 1280, height: 600 });
+  await page.waitFor(5000);
+  await page.screenshot(options);
+  browser.close();
+  if (fs.existsSync(`./screenShots/${fileName}`)) {
+    resolve(`Screen shot complete for ${url}`);
+  } else {
+    const error = new Error(`Screen shot was not taken for ${url}`);
+    reject(error);
+  }
+})());
 
 Promise.all([
   correctSiteImages('https://stopthefcc.net/', 'stopthefcc.png', {
@@ -49,7 +46,7 @@ Promise.all([
     y: 2350,
     width: 1280,
     height: 600,
-  })
+  }),
 ]).then((response) => {
   console.log(response);
 }).catch((error) => {
