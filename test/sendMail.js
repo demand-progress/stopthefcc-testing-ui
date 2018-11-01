@@ -1,20 +1,12 @@
 const Mailgun = require('mailgun-js');
 const path = require('path');
+const dotenv = require('dotenv');
 
-let mailGunDomainKey;
-let mailgunApiKey;
-
-if (!process.env.MAILGUN_API_KEY) {
-  const { domain, apiKey } = require('../config.js');
-  mailGunDomainKey = domain;
-  mailgunApiKey = apiKey;
-}
+dotenv.config();
 
 const sendEmail = (toFromEmail, filePath) => {
   // sent email to notify of error
-  const apiKeyz = process.env.MAILGUN_API_KEY || mailgunApiKey;
-  const domainz = process.env.MAILGUN_DOMAIN || mailGunDomainKey;
-  const mailgun = new Mailgun({ apiKey: apiKeyz, domain: domainz });
+  const mailgun = new Mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN});
   const filePathName = `./${filePath}.png`;
   const filepath = path.join(__dirname, filePathName);
   const data = {
