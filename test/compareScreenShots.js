@@ -18,8 +18,7 @@ const compareScreenshots = (filePath, fileName) => {
       const diff = new PNG({ width: img1.width, height: img2.height });
       const numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, img1.width, img1.height, { threshold: 0.1});
       if (numDiffPixels > 0 || numDiffPixels < 0) {
-        console.log('num of pixels off ', numDiffPixels)
-        // sendEmail('mateo@demandprogress.org', filePath);
+        sendEmail('mateo@demandprogress.org', filePath);
       }
       expect(numDiffPixels, 'number of different pixels').equal(0);
       resolve(numDiffPixels);
