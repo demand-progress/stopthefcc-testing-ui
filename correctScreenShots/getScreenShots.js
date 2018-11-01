@@ -1,25 +1,15 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-let cloudname; 
-let apikey;
-let  apisecret;
-
-if (!process.env.MAILGUN_API_KEY) {
-  const { cloud_name, api_key, api_secret } = require('../config.js');
-  cloudname = cloud_name
-  apikey = api_key
-  apisecret = api_secret
-}
-
-// make function that will create screen shots of several sites
 const cloudinary = require('cloudinary');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME || cloudname,
-  api_key: process.env.API_KEY || apikey,
-  api_secret: process.env.API_SECRETE || apisecret,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
-
 
 const correctSiteImages = (url, fileName, clip) => new Promise((resolve, reject) => (async () => {
   const options = {
